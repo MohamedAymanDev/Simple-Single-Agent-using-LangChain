@@ -4,7 +4,7 @@ import requests
 import certifi
 from dotenv import load_dotenv
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain.tools import tool
 from langchain.tools.tavily_search import TavilySearchResults
 from langchain.agents import create_react_agent, AgentExecutor
@@ -52,10 +52,9 @@ def get_weather_data(city: str) -> str:
 
 
 # LLM
-llm = ChatGoogleGenerativeAI(
-    model="gemini-3.6-flash",
-    temperature=0,
-    google_api_key=GOOGLE_API_KEY
+llm = ChatGroq(
+    model="openai/gpt-oss-20b",
+    temperature=0
 )
 
 
