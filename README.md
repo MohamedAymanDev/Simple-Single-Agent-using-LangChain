@@ -1,18 +1,24 @@
 # 🤖 AI Research & Weather Agent
 
-A simple **AI Agent** built with **LangChain** and **Google Gemini** that can reason about user requests and dynamically use external tools to find information and retrieve current weather data.
+A simple **AI Agent** built with **LangChain** and **Groq** that can reason about user requests, dynamically select external tools, retrieve information, and provide current weather data.
 
-The project demonstrates how an LLM can work as an **agent**, decide which tool to use, execute it, and generate a final grounded response.
+The project demonstrates how an LLM can work as an **AI Agent**, understand a user's request, decide which tool is needed, execute it, process the results, and generate a final response.
+
+## 🚀 Live Demo
+
+👉 **Try the AI Agent:**
+https://simple-single-agent-using-langchain-cbsscz6nfdpw4jcep55zpt.streamlit.app/
 
 ---
 
 ## 🚀 Features
 
-* 🤖 AI Agent powered by **Google Gemini**
+* 🤖 AI Agent powered by **Groq**
+* 🧠 **GPT-OSS-20B** as the LLM
 * 🔎 Real-time web search using **Tavily**
 * 🌤️ Current weather information using **WeatherStack**
-* 🧠 ReAct-based agent reasoning
-* 🔧 Dynamic tool selection
+* 🔧 Tool Calling and dynamic tool selection
+* 🧩 LangChain Agent architecture
 * 💬 Interactive **Streamlit GUI**
 * ✨ Animated futuristic UI
 * ⚡ Error handling for agent parsing and API errors
@@ -22,27 +28,37 @@ The project demonstrates how an LLM can work as an **agent**, decide which tool 
 ## 🏗️ Architecture
 
 ```text
-                    User
-                      │
-                      ▼
-              ┌───────────────┐
-              │  Streamlit UI │
-              └───────┬───────┘
-                      │
-                      ▼
-              ┌───────────────┐
-              │  LangChain    │
-              │     Agent     │
-              └───────┬───────┘
-                      │
-             ┌────────┼────────┐
-             ▼        ▼        ▼
-         Gemini    Tavily   WeatherStack
-           LLM      Search      API
-             │        │        │
-             └────────┼────────┘
-                      ▼
-                Final Answer
+                         User
+                           │
+                           ▼
+                  ┌────────────────┐
+                  │  Streamlit UI  │
+                  └───────┬────────┘
+                          │
+                          ▼
+                  ┌────────────────┐
+                  │    LangChain   │
+                  │      Agent     │
+                  └───────┬────────┘
+                          │
+                 ┌────────┴────────┐
+                 │                 │
+                 ▼                 ▼
+          ┌─────────────┐   ┌───────────────┐
+          │    Groq     │   │     Tools     │
+          │ GPT-OSS-20B │   │               │
+          └─────────────┘   └───────┬───────┘
+                                    │
+                         ┌──────────┴──────────┐
+                         ▼                     ▼
+                  ┌────────────┐       ┌──────────────┐
+                  │   Tavily   │       │ WeatherStack │
+                  │   Search   │       │     API      │
+                  └────────────┘       └──────────────┘
+                         │                     │
+                         └──────────┬──────────┘
+                                    ▼
+                              Final Answer
 ```
 
 ---
@@ -51,7 +67,8 @@ The project demonstrates how an LLM can work as an **agent**, decide which tool 
 
 * **Python**
 * **LangChain**
-* **Google Gemini**
+* **Groq**
+* **GPT-OSS-20B**
 * **Tavily Search**
 * **WeatherStack API**
 * **Streamlit**
@@ -63,12 +80,13 @@ The project demonstrates how an LLM can work as an **agent**, decide which tool 
 ## 📂 Project Structure
 
 ```text
-AI-Research-Weather-Agent/
+Simple-Single-Agent-using-LangChain/
 │
 ├── main.py
 ├── app.py
 ├── .env
 ├── requirements.txt
+├── .gitignore
 └── README.md
 ```
 
@@ -79,7 +97,7 @@ AI-Research-Weather-Agent/
 Create a `.env` file in the project root:
 
 ```env
-GOOGLE_API_KEY=your_google_api_key
+GROQ_API_KEY=your_groq_api_key
 TAVILY_API_KEY=your_tavily_api_key
 WEATHERSTACK_API_KEY=your_weatherstack_api_key
 ```
@@ -92,6 +110,7 @@ Add this to `.gitignore`:
 .env
 .venv/
 __pycache__/
+*.pyc
 ```
 
 ---
@@ -101,8 +120,8 @@ __pycache__/
 Clone the repository:
 
 ```bash
-git clone YOUR_REPOSITORY_URL
-cd AI-Research-Weather-Agent
+git clone https://github.com/MohamedAymanDev/Simple-Single-Agent-using-LangChain.git
+cd Simple-Single-Agent-using-LangChain
 ```
 
 Create a virtual environment:
@@ -149,20 +168,22 @@ You can ask:
 Find the capital of Egypt and then find its current weather.
 ```
 
-The agent can reason about the request and use the available tools to retrieve the required information.
+The agent understands the request, determines which tools are required, executes them, and combines the results into a final response.
 
-Example workflow:
+### Example Workflow
 
 ```text
 User Question
       ↓
-Gemini analyzes the request
+GPT-OSS-20B analyzes the request
       ↓
-Select appropriate tool
+Agent selects the appropriate tool
       ↓
 Tavily Search / WeatherStack
       ↓
-Gemini processes the result
+Tool returns the result
+      ↓
+GPT-OSS-20B processes the result
       ↓
 Final Answer
 ```
@@ -173,13 +194,15 @@ Final Answer
 
 Through this project, I practiced:
 
-* Building AI Agents with LangChain
-* Understanding the **ReAct Agent** pattern
+* Building AI Agents with **LangChain**
+* Understanding **Tool Calling**
 * Connecting LLMs with external tools
-* Tool calling and dynamic tool selection
+* Dynamic tool selection
 * Working with REST APIs
+* Integrating **Groq** with LangChain
+* Using **GPT-OSS-20B** for agent-based applications
 * Managing API keys using environment variables
-* Building interactive AI applications with Streamlit
+* Building interactive AI applications with **Streamlit**
 * Handling API and agent errors
 * Creating a user-friendly AI application interface
 
@@ -194,7 +217,8 @@ Through this project, I practiced:
 * Add response streaming
 * Add tool execution history
 * Add authentication
-* Deploy the application online
+* Improve UI/UX
+* Expand the agent with additional capabilities
 
 ---
 
