@@ -102,7 +102,6 @@ TAVILY_API_KEY=your_tavily_api_key
 WEATHERSTACK_API_KEY=your_weatherstack_api_key
 ```
 
-> ⚠️ Never upload your `.env` file or expose your API keys on GitHub.
 
 Add this to `.gitignore`:
 
