@@ -9,7 +9,7 @@ import certifi
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain.tools import tool
-from langchain.tools.tavily_search import TavilySearchResults
+from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain import hub
 
